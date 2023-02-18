@@ -1,7 +1,7 @@
 export default function Party(props) {
   return (
     <div className="party">
-      <img src={props.isImg} />
+      <img src={props.isImg} alt="img" />
       <div>{props.votesNumber}/10</div>
       <div className="firstButton">
         {" "}
