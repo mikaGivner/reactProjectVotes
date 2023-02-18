@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function Party(props) {
   return (
     <div className="party">
