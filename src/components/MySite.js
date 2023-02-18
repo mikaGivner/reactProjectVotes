@@ -323,7 +323,7 @@ export default function MySite() {
       setVotesNumRock(party2);
     } else {
       party3++;
-      setVotesNumPop(party3);
+      setVotesNumJazz(party3);
     }
 
     cancelChine();
