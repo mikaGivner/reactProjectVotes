@@ -284,6 +284,7 @@ export default function MySite() {
     },
   ];
 
+  const [isLogOut, setIsLogOut] = useState(true);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [wrongUser, setWrongUser] = useState("");
@@ -313,6 +314,7 @@ export default function MySite() {
     setVotePageClass("votePage noDisplay");
     setName("");
     setPassword("");
+    setIsLogOut(true);
   }
   function acceptedMassege(e) {
     if (e.target.id === "1") {
@@ -326,7 +328,7 @@ export default function MySite() {
       setVotesNumJazz(party3);
     }
 
-    cancelChine();
+    // cancelChine();
     setVotePageClass("votePage noDisplay");
     setVoteAcceptedPageClass("voteAccepted isDisplay");
     votedUsers.push(name);
@@ -359,6 +361,7 @@ export default function MySite() {
               console.log("you can move forward");
               setFullData("");
               setWrongUser("");
+              setIsLogOut(false);
             } else {
               setWrongUser("your password is not correct");
             }
@@ -372,20 +375,7 @@ export default function MySite() {
       });
     }
   }
-  const [secondButtonClass, setSecondButtonClass] = useState(
-    "secondButtons noButton"
-  );
-  const [firstButtonClass, setFirstButtonClass] = useState("voteNow isButton");
 
-  function verification() {
-    setSecondButtonClass("secondButtons isButton");
-    setFirstButtonClass("voteNow noButton");
-  }
-
-  function cancelChine() {
-    setSecondButtonClass("secondButtons noButton");
-    setFirstButtonClass("voteNow isButton");
-  }
   return (
     <div>
       <section className={landingPageClass}>
@@ -412,32 +402,34 @@ export default function MySite() {
           <div className="wrongUser">{wrongUser}</div>
         </div>
       </section>
-      <section className={votePageClass}>
-        <h1>hey {name}, So Which Music Do U Love?</h1>
+      {!isLogOut && (
+        <section className={votePageClass}>
+          <h1>hey {name}, So Which Music Do U Love?</h1>
 
-        <div className="parties">
-          {partyData.map((partyCard, i) => {
-            return (
-              <div className="parties">
-                <Party
-                  firstButtonClass={firstButtonClass}
-                  secondButtonClass={secondButtonClass}
-                  onClick3={verification}
-                  onClick2={cancelChine}
-                  onClick1={acceptedMassege}
-                  key={i}
-                  id={partyCard.id}
-                  isImg={partyCard.party}
-                  votesNumber={partyCard.votesNum}
-                ></Party>
-              </div>
-            );
-          })}
-        </div>
-        <button className="logout" onClick={LogOut}>
-          Log-out
-        </button>
-      </section>
+          <div className="parties">
+            {partyData.map((partyCard, i) => {
+              return (
+                <div className="parties">
+                  <Party
+                    // firstButtonClass={firstButtonClass}
+                    // secondButtonClass={secondButtonClass}
+                    // onClick3={verification}
+                    // onClick2={cancelChine}
+                    onClick1={acceptedMassege}
+                    key={i}
+                    id={partyCard.id}
+                    isImg={partyCard.party}
+                    votesNumber={partyCard.votesNum}
+                  ></Party>
+                </div>
+              );
+            })}
+          </div>
+          <button className="logout" onClick={LogOut}>
+            Log-out
+          </button>
+        </section>
+      )}
       <section className={voteAcceptedPageClass}>
         Thank you for your vote
         <button className="logout" onClick={LogOut}>
